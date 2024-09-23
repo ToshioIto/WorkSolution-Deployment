@@ -1,15 +1,13 @@
-#
-# Build stage
-#
-FROM maven:3.8.6-eclipse-temurin-17 AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
+# the base image
+FROM openjdk:17.0.2-jdk-oracle
 
-#
-# Package stage
-#
-FROM openjdk:17-ea-3-oracle
-COPY --from=build /home/app/target/WorkSolutionAPI-0.0.1-SNAPSHOT.jar /usr/local/lib/WorkSolutionAPI.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/WorkSolutionAPI.jar"]
+# the JAR file path
+ARG JAR_FILE=target/*.jar
+
+# Copy the JAR file from the build context into the Docker image
+COPY ${JAR_FILE} backend.jar
+
+CMD apt-get update -y
+
+# Set the default command to run the Java application
+ENTRYPOINT ["java", "-Xmx2048M", "-jar", "/backend.jar"]
