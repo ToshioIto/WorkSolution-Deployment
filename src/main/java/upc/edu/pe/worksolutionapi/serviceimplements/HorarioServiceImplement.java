@@ -1,5 +1,4 @@
-package upc.edu.pe.worksolutionapi.servicesimplements;
-
+package upc.edu.pe.worksolutionapi.serviceimplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upc.edu.pe.worksolutionapi.entities.Horario;

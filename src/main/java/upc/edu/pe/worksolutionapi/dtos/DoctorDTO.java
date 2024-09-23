@@ -1,7 +1,5 @@
 package upc.edu.pe.worksolutionapi.dtos;
 
-import upc.edu.pe.worksolutionapi.entities.Horario;
-
 public class DoctorDTO {
     private Long id;
     private String nombre;
