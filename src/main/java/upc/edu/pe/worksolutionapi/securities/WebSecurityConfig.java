@@ -63,6 +63,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(antMatcher("/authenticate")).permitAll()
                         .requestMatchers(antMatcher("/usuarios")).permitAll() // Permite el acceso a registrar usuarios
+                        .requestMatchers(antMatcher("/swagger-ui/**")).permitAll() // Permite el acceso a Swagger UI
+                        .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll() // Permite acceso a la documentación de Swagger
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
@@ -72,5 +74,6 @@ public class WebSecurityConfig {
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
+
 
 }
